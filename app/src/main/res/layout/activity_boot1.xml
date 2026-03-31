@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="bottom"
-    android:layout_gravity="left"
+    android:layout_gravity="start"
     android:background="@drawable/boot1_bg_gradient"
     android:id="@+id/main"
     tools:context=".Boot1">

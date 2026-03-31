@@ -43,6 +43,36 @@
 
     </style>
 
+    <style name="btnFilled">
+        <item name="cornerRadius">12px</item>
+        <item name="backgroundTint">#5C6BF2</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#E9ECFC</item>
+        <item name="android:layout_margin">5dp</item>
+
+    </style>
+
+    <style name="btnHollow">
+        <item name="cornerRadius">12px</item>
+        <item name="android:backgroundTint">#00000000</item>
+        <item name="android:foreground">@drawable/border</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#5C6BF2</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+
+
+    <style name="btnSaveButton">
+        <item name="cornerRadius">5dp</item>
+        <item name="backgroundTint">#5C6BF2</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#E9ECFC</item>
+        <item name="android:text">Save Changes</item>
+        <item name="android:layout_margin">5dp</item>
+
+    </style>
+
     <style name="btnSkip">
         <item name="cornerRadius">5dp</item>
         <item name="android:backgroundTint">#00000000</item>

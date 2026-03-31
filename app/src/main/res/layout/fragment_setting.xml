@@ -92,6 +92,7 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_def_curr"/>
                     <Button
+                        android:id="@+id/btnSetDefaultCurrency"
                         android:layout_weight="5"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -126,6 +127,7 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_clear_history"/>
                     <Button
+                        android:id="@+id/btnClearTransaction"
                         android:layout_weight="5"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -159,6 +161,7 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_restore_def"/>
                     <Button
+                        android:id="@+id/btnResetSetings"
                         android:layout_weight="5"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -181,16 +184,14 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnSaveChanges"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    style="@style/btnSaveButton"
+                    >
 
-                    android:text="Save Setting"
-                    android:textSize="20dp"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/btn_rounded"
-                    android:backgroundTint="@color/btn_color">
 
                 </Button>
-
             </LinearLayout>
 
 
