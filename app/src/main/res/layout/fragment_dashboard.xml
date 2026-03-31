@@ -7,318 +7,213 @@
     android:layout_height="match_parent"
     tools:context=".dashboardFrag">
 
-<!--    Screen Layout-->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_color"
-    android:orientation="vertical">
-    <!--Dashboard Container-->
+    <!-- MAIN SCREEN -->
     <LinearLayout
-        android:id="@+id/dashboardCurrencyLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        >
-        <!--Title Container-->
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp">
-        <ImageView
-            android:id="@+id/imgdashLogo"
-            android:layout_gravity="center"
-            android:layout_width="50dp"
-            android:layout_height="45dp"
-            android:src="@drawable/pc_logo">
-
-        </ImageView>
-
-        <TextView
-            android:id="@+id/txtpageTitle"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dashboard"
-            style="@style/db_frag_title"
-           >
-
-        </TextView>
-
-        <ImageButton
-                android:id="@+id/btnSearch"
-                android:layout_gravity="center"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_search"
-                android:background="#00000000"/>
-
-    </LinearLayout>
-    <!-- Dashboard Layout-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-        <!--Dashboard container-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:orientation="vertical"
-            android:background="@drawable/navbar_container"
-            >
-            <!-- Country code title-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <!-- Flag -->
-                <LinearLayout
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="10dp"
-                        android:text="U"
-                        style="@style/db_icon_text"
-                        android:background="@drawable/bg_circle"/>
-
-                </LinearLayout>
-                <!-- Flag End-->
-
-
-                <!-- Country Code -->
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/db_txtBody"
-                        android:text="USD" />
-
-
-                </LinearLayout>
-                <!-- Country Code End-->
-
-
-                <!-- Value per country -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_weight="2">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/db_txtBody"
-                        android:text="1 United States Dollar" />
-
-
-                </LinearLayout>
-                <!-- Value per country End-->
-
-
-            </LinearLayout>
-            <!-- Country code title End-->
-
-
-            <!-- Exchange Value Container-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <!-- Exchange Value-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="15dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:padding="5dp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="₱50.69"
-                        android:textColor="@color/text_color"
-                        android:textStyle="bold"
-                        android:textSize="50dp">
-
-                    </TextView>
-
-                </LinearLayout>
-                <!-- Exchange Value-->
-
-
-                <!-- Exchange Button-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:padding="15dp"
-                    >
-
-                    <ImageButton
-                        android:id="@+id/btnExchange"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_exchange_light"
-                        android:background="@drawable/btn_rounded">
-
-                    </ImageButton>
-
-                </LinearLayout>
-            <!-- Exchange Button-->
-
-            </LinearLayout>
-            <!-- Exchange Value Container-->
-
-            <!-- PHP Label-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/db_txtBody"
-                    android:text="in Philippine Peso"
-                    />
-            </LinearLayout>
-            <!-- PHP Label-->
-
-
-        </LinearLayout>
-
-         </LinearLayout>
-    </LinearLayout>
-
-
-    <!-- Live Rates-->
-    <LinearLayout
-        android:id="@+id/liveRatesScrollLayout"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="10"
-        android:paddingRight="30dp"
-        android:paddingLeft="30dp"
-        android:paddingTop="15dp"
-        >
+        android:background="@color/bg_color"
+        android:orientation="vertical">
 
-        <!-- Scroll Layout Container-->
+        <!-- DASHBOARD TOP SECTION -->
         <LinearLayout
+            android:id="@+id/dashboardCurrencyLayout"
             android:layout_width="match_parent"
-            android:layout_height="430dp"
-            android:layout_gravity="center"
-            android:background="@drawable/scroll_container"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:gravity="center">
 
-            <ScrollView
+            <!-- TITLE BAR -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp">
 
-                        <!-- Outer Container Layout-->
+                <ImageView
+                    android:id="@+id/imgdashLogo"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/pc_logo" />
+
+                <TextView
+                    android:id="@+id/txtpageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="Dashboard"
+                    style="@style/db_frag_title" />
+
+                <ImageButton
+                    android:id="@+id/btnSearch"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_search" />
+            </LinearLayout>
+
+            <!-- CARD CONTAINER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:orientation="vertical"
+                android:background="@drawable/navbar_container">
+
+                <!-- TOP ROW -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-<!-- Start Putting contents below this line -->
-                        <!-- Inner Container Layout-->
-                        <LinearLayout
+                    android:orientation="horizontal">
+
+                    <!-- FLAG -->
+                    <TextView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:text="U"
+                        style="@style/db_icon_text"
+                        android:background="@drawable/bg_circle" />
+
+                    <!-- BASE CURRENCY -->
+                    <TextView
+                        android:id="@+id/txtBaseCurrency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:text="USD"
+                        style="@style/db_txtBody" />
+
+                    <!-- DESCRIPTION -->
+                    <TextView
+                        android:id="@+id/txtCurrencyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:text="1 Currency"
+                        style="@style/db_txtBody" />
+                </LinearLayout>
+
+                <!-- MAIN RATE DISPLAY -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:text="₱0.00"
+                        android:textColor="@color/text_color"
+                        android:textStyle="bold"
+                        android:textSize="50sp" />
+
+                    <ImageButton
+                        android:id="@+id/btnExchange"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_exchange_light"
+                        android:background="@drawable/btn_rounded" />
+                </LinearLayout>
+
+                <!-- LABEL -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="in Philippine Peso"
+                    style="@style/db_txtBody" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- LIVE RATES SECTION -->
+        <LinearLayout
+            android:id="@+id/liveRatesScrollLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="15dp"
+            android:orientation="vertical">
+
+            <!-- SCROLL CONTAINER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="430dp"
+                android:background="@drawable/scroll_container"
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
+
+                    <!-- DYNAMIC CONTENT -->
+                    <LinearLayout
+                        android:id="@+id/liveRatesContainer"
                         android:layout_width="match_parent"
-                        android:layout_height="75dp"
-                        android:orientation="horizontal"
-                        android:layout_margin="5dp">
-                            <!-- Country Container-->
-                          <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- SAMPLE ROW (will be replaced dynamically) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
                             android:orientation="horizontal"
-                            android:layout_weight="1">
-                            <!-- Country Flag/Logo -->
+                            android:layout_margin="5dp">
+
                             <TextView
-                                android:gravity="center"
                                 android:layout_width="45dp"
                                 android:layout_height="45dp"
                                 android:layout_margin="15dp"
+                                android:gravity="center"
                                 android:text="U"
                                 style="@style/db_icon_text"
-                                android:background="@drawable/bg_circle"/>
+                                android:background="@drawable/bg_circle" />
 
-                        <!-- Country Code -->
-                        <TextView
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            style="@style/db_frag_title"
-                            android:text="USD"
-                            android:layout_margin="5dp"
-                            >
-                        </TextView>
-                    </LinearLayout>
-                            <!-- Country Container End-->
-
-                            <!-- Value container-->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:paddingRight="10dp"
-                            android:gravity="right"
-                            android:layout_weight="7">
-                            <!-- Value -->
                             <TextView
-                                android:layout_gravity="center"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="99.00"
-                                style="@style/db_frag_title">
+                                android:layout_gravity="center"
+                                android:text="USD"
+                                style="@style/db_frag_title"
+                                android:layout_margin="5dp" />
 
-                            </TextView>
-                            </LinearLayout>
-                            <!-- Value Container End-->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text="99.00"
+                                style="@style/db_frag_title" />
+
                         </LinearLayout>
-                        <!-- Inner Container Layout End-->
+
                         <com.google.android.material.divider.MaterialDivider
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:dividerColor="@color/text_color2"/>
+                            app:dividerColor="@color/text_color2" />
 
-
-<!-- End point of contents-->
-                        </LinearLayout>
-                    <!-- Outer Container Layout End-->
-                 </ScrollView>
-            <!-- Scroll Layout Container End-->
-
-        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
