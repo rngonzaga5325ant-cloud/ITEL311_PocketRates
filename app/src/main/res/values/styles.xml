@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="txtBody_type1">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#E9ECFC</item>
+        <item name="android:lineHeight">30dp</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+
+    <style name="txtTitle_type1">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#E9ECFC</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineHeight">40dp</item>
+    </style>
+
+    <style name="txtBody_type2">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#5C6BF2</item>
+        <item name="android:lineHeight">30dp</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+
+    <style name="txtTitle_type2">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#5C6BF2</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineHeight">40dp</item>
+    </style>
+
+    <style name="btnContinue">
+        <item name="cornerRadius">5dp</item>
+        <item name="backgroundTint">#5C6BF2</item>
+        <item name="android:textColor">#E9ECFC</item>
+        <item name="android:text">Continue</item>
+        <item name="android:layout_margin">5dp</item>
+
+    </style>
+
+    <style name="btnFilled">
+        <item name="cornerRadius">12px</item>
+        <item name="backgroundTint">#5C6BF2</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#E9ECFC</item>
+        <item name="android:layout_margin">5dp</item>
+
+    </style>
+
+    <style name="btnHollow">
+        <item name="cornerRadius">12px</item>
+        <item name="android:backgroundTint">#00000000</item>
+        <item name="android:foreground">@drawable/border</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#5C6BF2</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+
+
+    <style name="btnSaveButton">
+        <item name="cornerRadius">5dp</item>
+        <item name="backgroundTint">#5C6BF2</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#E9ECFC</item>
+        <item name="android:text">Save Changes</item>
+        <item name="android:layout_margin">5dp</item>
+
+    </style>
+
+    <style name="btnSkip">
+        <item name="cornerRadius">5dp</item>
+        <item name="android:backgroundTint">#00000000</item>
+        <item name="android:foreground">@drawable/border</item>
+        <item name="android:text">Skip</item>
+        <item name="android:textColor">#5C6BF2</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="btnGetStarted">
+        <item name="cornerRadius">5dp</item>
+        <item name="backgroundTint">#FDFDFD</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:text">Get Started</item>
+        <item name="android:textColor">#5C6BF2</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="db_frag_title">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+    <style name="db_txtBody">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_gravity">center</item>
+
+
+    </style>
+
+    <style name="db_icon_text">
+        <item name="android:textColor">@color/bg_color</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="numpad_btn">
+        <item name="android:background">#00000000</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:padding">25dp</item>
+
+    </style>
+
+    <style name="lbl_transact">
+        <item name="android:background">#00000000</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:layout_margin">5dp</item>
+
+    </style>
+
+    <style name="lbl_transact2">
+        <item name="android:background">#00000000</item>
+        <item name="android:textColor">#5C6BF2</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_margin">5dp</item>
+
+    </style>
+</resources>
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".clearDialog_settings">
+    
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:layout_margin="10dp"
+       android:padding="10dp"
+       >
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+            android:gravity="center"
+           android:textSize="30dp"
+           android:textStyle="bold"
+           android:text="Clear Transaction"
+           android:layout_margin="5dp"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:textStyle="bold"
+           android:textSize="25dp"
+           style="@style/txtBody_type2"
+           android:text="Are you sure you want to clear\n
+your transaction history?"
+           android:layout_margin="5dp"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:textSize="15dp"
+           android:textColor="#717171"
+           android:text="This will permanently delete all your recorded\n
+currency conversions. This action\n
+cannot be undone."
+           android:layout_margin="5dp"/>
+
+   </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="10dp">
+
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            style="@style/btnFilled"
+            android:text="Clear History"
+      >
+
+        </Button>
+        <Button
+            android:id="@+id/btnSkip"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            style="@style/btnHollow"
+            android:text="Cancel"
+           >
+
+        </Button>
+
+
+    </LinearLayout>
+
+</LinearLayout>

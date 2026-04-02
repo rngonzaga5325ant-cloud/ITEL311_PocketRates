@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dashboardFrag">
+
+    <!-- MAIN SCREEN -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        android:orientation="vertical">
+
+        <!-- DASHBOARD TOP SECTION -->
+        <LinearLayout
+            android:id="@+id/dashboardCurrencyLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <!-- TITLE BAR -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/imgdashLogo"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/pc_logo" />
+
+                <TextView
+                    android:id="@+id/txtpageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="Dashboard"
+                    style="@style/db_frag_title" />
+
+                <ImageButton
+                    android:id="@+id/btnSearch"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_search" />
+            </LinearLayout>
+
+            <!-- CARD CONTAINER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:orientation="vertical"
+                android:background="@drawable/navbar_container">
+
+                <!-- TOP ROW -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- FLAG -->
+                    <TextView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:text="U"
+                        style="@style/db_icon_text"
+                        android:background="@drawable/bg_circle" />
+
+                    <!-- BASE CURRENCY -->
+                    <TextView
+                        android:id="@+id/txtBaseCurrency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:text="USD"
+                        style="@style/db_txtBody" />
+
+                    <!-- DESCRIPTION -->
+                    <TextView
+                        android:id="@+id/txtCurrencyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:text="1 Currency"
+                        style="@style/db_txtBody" />
+                </LinearLayout>
+
+                <!-- MAIN RATE DISPLAY -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:text="₱0.00"
+                        android:textColor="@color/text_color"
+                        android:textStyle="bold"
+                        android:textSize="50sp" />
+
+                    <ImageButton
+                        android:id="@+id/btnExchange"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_exchange_light"
+                        android:background="@drawable/btn_rounded" />
+                </LinearLayout>
+
+                <!-- LABEL -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="in Philippine Peso"
+                    style="@style/db_txtBody" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- LIVE RATES SECTION -->
+        <LinearLayout
+            android:id="@+id/liveRatesScrollLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp">
+
+            <!-- SCROLL CONTAINER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="430dp"
+                android:background="@drawable/scroll_container"
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
+
+                    <!-- DYNAMIC CONTENT -->
+                    <LinearLayout
+                        android:id="@+id/liveRatesContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- SAMPLE ROW (will be replaced dynamically) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/db_icon_text"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:layout_margin="15dp"
+                                android:background="@drawable/bg_circle"
+                                android:gravity="center"
+                                android:text="U" />
+
+                            <TextView
+                                style="@style/db_frag_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:text="USD" />
+
+                            <TextView
+                                style="@style/db_frag_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text="99.00" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dividerColor="@color/text_color2" />
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
