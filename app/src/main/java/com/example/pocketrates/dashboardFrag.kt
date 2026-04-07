@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import okhttp3.*
 import org.json.JSONObject
@@ -56,6 +57,10 @@ class dashboardFrag : Fragment() {
         txtRate = view.findViewById(R.id.txtRate)
         txtCurrencyName = view.findViewById(R.id.txtCurrencyName)
         liveRatesContainer = view.findViewById(R.id.liveRatesContainer)
+
+        // Set black font color for txtRate and txtCurrencyName
+        txtRate.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
+        txtCurrencyName.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
 
         // Click
         btnExchange.setOnClickListener {
@@ -207,15 +212,32 @@ class dashboardFrag : Fragment() {
 
             val convertedToPHP = baseToPHP / rate
 
+            // Create TextView for currency item
             val textView = TextView(requireContext())
-
             textView.text =
                 "$currency - ${currencyMap[currency] ?: currency} → ₱ %.2f".format(convertedToPHP)
-
             textView.textSize = 16f
             textView.setPadding(24, 24, 24, 24)
-
+            textView.setTextColor(0xFF000000.toInt())
             liveRatesContainer.addView(textView)
+
+            // Add divider after each item (except the last one)
+            if (currency != ratesMap.keys.last()) {
+                val divider = View(requireContext())
+                val layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    1.dpToPx(requireContext()) // Convert 1dp to pixels
+                )
+                layoutParams.setMargins(24, 0, 24, 0) // Match padding of text views
+                divider.layoutParams = layoutParams
+                divider.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.darker_gray))
+                liveRatesContainer.addView(divider)
+            }
         }
     }
+}
+
+// Extension function to convert dp to pixels
+fun Int.dpToPx(context: android.content.Context): Int {
+    return (this * context.resources.displayMetrics.density).toInt()
 }
