@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
+import android.widget.TextView
+import android.widget.LinearLayout
+
 
 class dashboardFrag : Fragment() {
 
@@ -208,29 +211,52 @@ class dashboardFrag : Fragment() {
 
         val baseToPHP = ratesMap["PHP"] ?: return
 
-        for ((currency, rate) in ratesMap.toSortedMap()) {
+        val entries = ratesMap.toSortedMap().entries.toList()
+
+        for ((index, entry) in entries.withIndex()) {
+            val currency = entry.key
+            val rate = entry.value
 
             val convertedToPHP = baseToPHP / rate
 
-            // Create TextView for currency item
-            val textView = TextView(requireContext())
-            textView.text =
-                "$currency - ${currencyMap[currency] ?: currency} → ₱ %.2f".format(convertedToPHP)
-            textView.textSize = 16f
-            textView.setPadding(24, 24, 24, 24)
-            textView.setTextColor(0xFF000000.toInt())
-            liveRatesContainer.addView(textView)
+            // INFLATE THE ROW
+            val rowView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.item_live_rate, liveRatesContainer, false)
 
-            // Add divider after each item (except the last one)
-            if (currency != ratesMap.keys.last()) {
+            // CIRCLE (1ST 2 LETTERS)
+            val txtCircle = rowView.findViewById<TextView>(R.id.txtCurrencyCircle)
+            txtCircle.text = currency.take(2)
+
+            // CURRENCY CODE (USD, EU)
+            val txtCode = rowView.findViewById<TextView>(R.id.txtCurrencyCode)
+            txtCode.text = currency
+
+            // FULL NAME (UNITED STATES DOLLAR)
+            val txtName = rowView.findViewById<TextView>(R.id.txtCurrencyFullName)
+            txtName.text = currencyMap[currency] ?: currency
+
+            // RATE & COLOR
+            val txtRateView = rowView.findViewById<TextView>(R.id.txtCurrencyRate)
+            txtRateView.text = "%.2f".format(convertedToPHP)
+
+            when {
+                currency == "PHP" -> txtRateView.setTextColor(0xFF9E9E9E.toInt()) // gray — base
+                convertedToPHP > 1.0 -> txtRateView.setTextColor(0xFF4CAF50.toInt()) // green — higher
+                else -> txtRateView.setTextColor(0xFFF44336.toInt()) // red — lower
+            }
+
+            liveRatesContainer.addView(rowView)
+
+            // Divider (skip after last item)
+            if (index < entries.size - 1) {
                 val divider = View(requireContext())
-                val layoutParams = LinearLayout.LayoutParams(
+                val lp = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    1.dpToPx(requireContext()) // Convert 1dp to pixels
+                    1.dpToPx(requireContext())
                 )
-                layoutParams.setMargins(24, 0, 24, 0) // Match padding of text views
-                divider.layoutParams = layoutParams
-                divider.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.darker_gray))
+                lp.setMargins(74, 0, 16, 0) // indent to align under text, not circle
+                divider.layoutParams = lp
+                divider.setBackgroundColor(0xFFEEEEEE.toInt())
                 liveRatesContainer.addView(divider)
             }
         }

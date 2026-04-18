@@ -165,26 +165,15 @@
                     android:layout_height="wrap_content"
                     android:fillViewport="true">
 
-                    <!-- DYNAMIC CONTENT -->
+                    <!-- DYNAMIC CONTENT — populated by dashboardFrag.kt -->
                     <LinearLayout
                         android:id="@+id/liveRatesContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <!-- SAMPLE ROW (will be replaced dynamically) -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="75dp"
-                            android:layout_margin="5dp"
-                            android:orientation="horizontal"/>
-
-                        <com.google.android.material.divider.MaterialDivider
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:dividerColor="@color/text_color2" />
-
                     </LinearLayout>
+
                 </ScrollView>
             </LinearLayout>
         </LinearLayout>
