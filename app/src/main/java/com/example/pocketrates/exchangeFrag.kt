@@ -1,19 +1,16 @@
 package com.example.pocketrates
 
 import android.os.Bundle
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.appcompat.widget.PopupMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.ImageButton
-import androidx.appcompat.widget.PopupMenu
-
 
 class exchangeFrag : Fragment() {
 
-    //prevent from delay of fetching conversion
     private val handler = android.os.Handler(android.os.Looper.getMainLooper())
     private var runnable: Runnable? = null
 
@@ -27,6 +24,9 @@ class exchangeFrag : Fragment() {
     private var fromCurrency = "PHP"
     private var toCurrency = "USD"
     private var currencyList = listOf<String>()
+    private var lastRate = ""
+
+    private val viewModel: TransactionViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,55 +38,42 @@ class exchangeFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        txtCurrentVal = view.findViewById(R.id.txtCurrentVal)
+        txtCurrentVal   = view.findViewById(R.id.txtCurrentVal)
         lblConvertedBal = view.findViewById(R.id.lblConvertedBal)
         lblConvertionRate = view.findViewById(R.id.lblConvertionRate)
-        lblChangeCurrVal = view.findViewById(R.id.lblChangeCurrVal)
-        lblChangeConvVal = view.findViewById(R.id.lblChangeConvVal)
+        lblChangeCurrVal  = view.findViewById(R.id.lblChangeCurrVal)
+        lblChangeConvVal  = view.findViewById(R.id.lblChangeConvVal)
 
         lblChangeCurrVal.text = fromCurrency
         lblChangeConvVal.text = toCurrency
 
-        val btnSwap = view.findViewById<ImageButton>(R.id.btn_swap)
+        val btnSwap         = view.findViewById<ImageButton>(R.id.btn_swap)
         val btnChangeCurrVal = view.findViewById<ImageButton>(R.id.btnChangeCurrVal)
         val btnChangeConvVal = view.findViewById<ImageButton>(R.id.btnChangeConvVal)
+        val btnExchange      = view.findViewById<ImageButton>(R.id.btnExchange)
+
+        btnExchange.setOnClickListener { saveTransaction() }
 
         btnSwap.setOnClickListener {
-            // 1. Swap the internal currency codes
-            val tempCurrency = fromCurrency
+            val temp = fromCurrency
             fromCurrency = toCurrency
-            toCurrency = tempCurrency
-
-            // 2. Update the UI labels (PHP <-> USD)
+            toCurrency = temp
             lblChangeCurrVal.text = fromCurrency
             lblChangeConvVal.text = toCurrency
-
-            // 3. Swap the values: Move the converted result to the top input
             val previousResult = lblConvertedBal.text.toString()
-
             if (previousResult.isNotEmpty()) {
-                // Clean any potential commas and update the input variable
                 currentInput = previousResult.replace(",", "")
                 txtCurrentVal.text = currentInput
-
-                // 4. Trigger a fresh calculation with the new base/quote
                 recalculate()
             } else {
-                // Just swap symbols if there was no number entered
                 txtCurrentVal.text = ""
                 currentInput = ""
                 lblConvertedBal.text = ""
             }
         }
 
-
-        btnChangeCurrVal.setOnClickListener {
-            showCurrencyPopup(it, isFrom = true)
-        }
-
-        btnChangeConvVal.setOnClickListener {
-            showCurrencyPopup(it, isFrom = false)
-        }
+        btnChangeCurrVal.setOnClickListener { showCurrencyPopup(it, isFrom = true) }
+        btnChangeConvVal.setOnClickListener { showCurrencyPopup(it, isFrom = false) }
 
         view.findViewById<Button>(R.id.btn1).setOnClickListener { onNumberClick("1") }
         view.findViewById<Button>(R.id.btn2).setOnClickListener { onNumberClick("2") }
@@ -104,19 +91,46 @@ class exchangeFrag : Fragment() {
         fetchCurrencies()
     }
 
+    private fun saveTransaction() {
+        val fromAmount = currentInput
+        val toAmount   = lblConvertedBal.text.toString()
+
+        if (fromAmount.isEmpty() || toAmount.isEmpty() || toAmount == "..." || toAmount == "Error") {
+            Toast.makeText(requireContext(), "Please enter a valid amount first.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val calendar = java.util.Calendar.getInstance()
+        val date = java.text.SimpleDateFormat("MMM d", java.util.Locale.getDefault()).format(calendar.time)
+        val time = java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault()).format(calendar.time)
+
+        viewModel.insert(
+            TransactionEntity(
+                fromCurrency = fromCurrency,
+                toCurrency   = toCurrency,
+                fromAmount   = fromAmount,
+                toAmount     = toAmount,
+                rate         = lastRate,
+                date         = date,
+                time         = time
+            )
+        )
+
+        Toast.makeText(requireContext(), "Transaction saved!", Toast.LENGTH_SHORT).show()
+        (activity as MainActivity).apply {
+            setSelectedButton(binding.btnTransaction)
+            gotoFrag(transacFrag())
+        }
+    }
+
     private fun fetchCurrencies() {
         RetrofitClient.api.getCurrencies()
             .enqueue(object : retrofit2.Callback<Map<String, String>> {
-                override fun onResponse(
-                    call: retrofit2.Call<Map<String, String>>,
-                    response: retrofit2.Response<Map<String, String>>
-                ) {
+                override fun onResponse(call: retrofit2.Call<Map<String, String>>, response: retrofit2.Response<Map<String, String>>) {
                     if (response.isSuccessful) {
-                        val symbols = response.body() ?: return
-                        currencyList = symbols.keys.toList().sorted()
+                        currencyList = response.body()?.keys?.toList()?.sorted() ?: return
                     }
                 }
-
                 override fun onFailure(call: retrofit2.Call<Map<String, String>>, t: Throwable) {
                     t.printStackTrace()
                 }
@@ -125,17 +139,10 @@ class exchangeFrag : Fragment() {
 
     private fun showCurrencyPopup(anchor: View, isFrom: Boolean) {
         val popup = PopupMenu(requireContext(), anchor)
-        currencyList.forEach { currency ->
-            popup.menu.add(currency)
-        }
+        currencyList.forEach { popup.menu.add(it) }
         popup.setOnMenuItemClickListener { item ->
-            if (isFrom) {
-                fromCurrency = item.title.toString()
-                lblChangeCurrVal.text = fromCurrency
-            } else {
-                toCurrency = item.title.toString()
-                lblChangeConvVal.text = toCurrency
-            }
+            if (isFrom) { fromCurrency = item.title.toString(); lblChangeCurrVal.text = fromCurrency }
+            else        { toCurrency   = item.title.toString(); lblChangeConvVal.text = toCurrency }
             recalculate()
             true
         }
@@ -147,12 +154,7 @@ class exchangeFrag : Fragment() {
         currentInput += value
         txtCurrentVal.text = currentInput
         handleScroll()
-
-        // 1. Cancel the previous timer/request
         runnable?.let { handler.removeCallbacks(it) }
-
-        // 2. Start a 400ms timer. If the user types another number before 400ms,
-        // the previous request is CANCELLED. Only the final number gets sent to the API.
         runnable = Runnable { recalculate() }
         handler.postDelayed(runnable!!, 400)
     }
@@ -168,11 +170,10 @@ class exchangeFrag : Fragment() {
 
     private fun recalculate() {
         if (currentInput.isNotEmpty() && currentInput != ".") {
-            // delay
             lblConvertedBal.text = "..."
             convertCurrency(currentInput.toDouble())
         } else {
-            lblConvertedBal.text = ""
+            lblConvertedBal.text  = ""
             lblConvertionRate.text = ""
         }
     }
@@ -181,11 +182,8 @@ class exchangeFrag : Fragment() {
         txtCurrentVal.post {
             val textWidth = txtCurrentVal.layout?.getLineRight(0)?.toInt() ?: 0
             val viewWidth = txtCurrentVal.width - txtCurrentVal.paddingStart - txtCurrentVal.paddingEnd
-            if (textWidth > viewWidth) {
-                txtCurrentVal.scrollTo(textWidth - viewWidth, 0)
-            } else {
-                txtCurrentVal.scrollTo(0, 0)
-            }
+            if (textWidth > viewWidth) txtCurrentVal.scrollTo(textWidth - viewWidth, 0)
+            else txtCurrentVal.scrollTo(0, 0)
         }
     }
 
@@ -195,14 +193,11 @@ class exchangeFrag : Fragment() {
                 override fun onResponse(call: retrofit2.Call<RateResponse>, response: retrofit2.Response<RateResponse>) {
                     if (response.isSuccessful) {
                         val rates = response.body()?.rates ?: return
-                        val rate = rates[toCurrency] ?: return
+                        val rate  = rates[toCurrency] ?: return
                         val converted = rate * amount
-
-                        // Fix: Use Locale.US to ensure a "." decimal for the swap logic
-                        lblConvertedBal.text = String.format(java.util.Locale.US, "%.2f", converted)
-
-                        // Fix: Use a template for the rate label
-                        lblConvertionRate.text = "1 $fromCurrency = ${String.format(java.util.Locale.US, "%.4f", rate)} $toCurrency"
+                        lblConvertedBal.text  = String.format(java.util.Locale.US, "%.2f", converted)
+                        lastRate = "1 $fromCurrency = ${String.format(java.util.Locale.US, "%.4f", rate)} $toCurrency"
+                        lblConvertionRate.text = lastRate
                     }
                 }
                 override fun onFailure(call: retrofit2.Call<RateResponse>, t: Throwable) {
@@ -210,5 +205,4 @@ class exchangeFrag : Fragment() {
                 }
             })
     }
-
 }

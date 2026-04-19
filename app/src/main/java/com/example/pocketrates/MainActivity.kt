@@ -16,7 +16,7 @@ import com.example.pocketrates.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fragmentManager : FragmentManager
-    private lateinit var binding : ActivityMainBinding
+    internal lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setSelectedButton(selectedButton: ImageButton) {
+    internal fun setSelectedButton(selectedButton: ImageButton) {
         // Deselect all buttons
         binding.btnDashboard.isSelected = false
         binding.btnExchange.isSelected = false
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun gotoFrag(fragment: Fragment) {
+    internal fun gotoFrag(fragment: Fragment) {
         fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
     }
