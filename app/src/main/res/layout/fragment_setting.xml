@@ -161,7 +161,7 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_restore_def"/>
                     <Button
-                        android:id="@+id/btnResetSetings"
+                        android:id="@+id/btnResetSettings"
                         android:layout_weight="5"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -176,23 +176,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_margin="15dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnSaveChanges"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    style="@style/btnSaveButton"
-                    >
-
-
-                </Button>
-            </LinearLayout>
 
 
         </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.pocketrates
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import org.json.JSONObject
 import java.io.IOException
 import android.widget.TextView
 import android.widget.LinearLayout
+import java.util.Currency
+import java.util.Locale
 
 
 class dashboardFrag : Fragment() {
@@ -21,9 +24,7 @@ class dashboardFrag : Fragment() {
     // DATA
     // =========================
     private var selectedBaseCurrency = "USD"
-
-    private var baseCurrency = "USD"
-    private val quoteCurrency = "PHP"
+    private var selectedQuoteCurrency = "PHP"
 
     private val currencyMap = mutableMapOf<String, String>()
     private val currencyList = mutableListOf<String>()
@@ -64,6 +65,11 @@ class dashboardFrag : Fragment() {
         // Set black font color for txtRate and txtCurrencyName
         txtRate.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
         txtCurrencyName.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
+
+        // Load Preferences
+        val sharedPreferences = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        selectedBaseCurrency = sharedPreferences.getString("defaultCurrency", "USD") ?: "USD"
+        selectedQuoteCurrency = sharedPreferences.getString("defaultQuoteCurrency", "PHP") ?: "PHP"
 
         // Click
         btnExchange.setOnClickListener {
@@ -116,12 +122,28 @@ class dashboardFrag : Fragment() {
                 ratesMap = map
 
                 requireActivity().runOnUiThread {
-                    val phpRate = ratesMap["PHP"] ?: return@runOnUiThread
-                    txtRate.text = "₱ %.2f".format(phpRate)
+                    val quoteRate = ratesMap[selectedQuoteCurrency] ?: 0.0
+                    val symbol = getCurrencySymbol(selectedQuoteCurrency)
+                    txtRate.text = "$symbol %.2f".format(quoteRate)
                     updateLiveRatesList()
                 }
             }
         })
+    }
+
+    private fun getCurrencySymbol(code: String): String {
+        return try {
+            Currency.getInstance(code).getSymbol(Locale.US)
+        } catch (e: Exception) {
+            when (code) {
+                "PHP" -> "₱"
+                "USD" -> "$"
+                "EUR" -> "€"
+                "GBP" -> "£"
+                "JPY" -> "¥"
+                else -> code
+            }
+        }
     }
 
     // =========================
@@ -209,7 +231,8 @@ class dashboardFrag : Fragment() {
 
         liveRatesContainer.removeAllViews()
 
-        val baseToPHP = ratesMap["PHP"] ?: return
+        val baseToQuote = ratesMap[selectedQuoteCurrency] ?: return
+        val quoteSymbol = getCurrencySymbol(selectedQuoteCurrency)
 
         val entries = ratesMap.toSortedMap().entries.toList()
 
@@ -217,7 +240,7 @@ class dashboardFrag : Fragment() {
             val currency = entry.key
             val rate = entry.value
 
-            val convertedToPHP = baseToPHP / rate
+            val convertedToQuote = baseToQuote / rate
 
             // INFLATE THE ROW
             val rowView = LayoutInflater.from(requireContext())
@@ -237,11 +260,11 @@ class dashboardFrag : Fragment() {
 
             // RATE & COLOR
             val txtRateView = rowView.findViewById<TextView>(R.id.txtCurrencyRate)
-            txtRateView.text = "%.2f".format(convertedToPHP)
+            txtRateView.text = "$quoteSymbol %.2f".format(convertedToQuote)
 
             when {
-                currency == "PHP" -> txtRateView.setTextColor(0xFF9E9E9E.toInt()) // gray — base
-                convertedToPHP > 1.0 -> txtRateView.setTextColor(0xFF4CAF50.toInt()) // green — higher
+                currency == selectedQuoteCurrency -> txtRateView.setTextColor(0xFF9E9E9E.toInt()) // gray — base
+                convertedToQuote > 1.0 -> txtRateView.setTextColor(0xFF4CAF50.toInt()) // green — higher
                 else -> txtRateView.setTextColor(0xFFF44336.toInt()) // red — lower
             }
 
