@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -35,9 +36,17 @@ class settingFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnSetDefaultCurrency: Button = view.findViewById(R.id.btnSetDefaultCurrency)
-        val btnClearTransaction: Button = view.findViewById(R.id.btnClearTransaction)
-        val btnResetSettings: Button = view.findViewById(R.id.btnResetSettings)
+        val btnSetDefaultCurrency: View = view.findViewById(R.id.btnSetDefaultCurrency)
+        val btnClearTransaction: View = view.findViewById(R.id.btnClearTransaction)
+        val btnResetSettings: View = view.findViewById(R.id.btnResetSettings)
+        val btnBack: ImageButton = view.findViewById(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            (activity as? MainActivity)?.let { main ->
+                main.setSelectedButton(main.binding.btnDashboard)
+                main.gotoFrag(dashboardFrag())
+            }
+        }
 
         btnSetDefaultCurrency.setOnClickListener {
             if (currencyList.isEmpty()) {

@@ -3,7 +3,7 @@ package com.example.pocketrates
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import android.widget.ImageButton
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    internal fun setSelectedButton(selectedButton: ImageButton) {
+    internal fun setSelectedButton(selectedButton: View) {
         // Deselect all buttons
         binding.btnDashboard.isSelected = false
         binding.btnExchange.isSelected = false

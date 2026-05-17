@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [TransactionEntity::class], version = 1, exportSchema = false)
+@Database(entities = [TransactionEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun transactionDao(): TransactionDao
@@ -19,8 +19,8 @@ abstract class AppDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "pocket_rates"  // ← database name
-                ).build().also { INSTANCE = it }
+                    "pocket_rates"
+                ).fallbackToDestructiveMigration().build().also { INSTANCE = it }
             }
         }
     }

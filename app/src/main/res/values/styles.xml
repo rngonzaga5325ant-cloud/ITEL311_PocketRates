@@ -93,16 +93,14 @@
 
     <style name="db_frag_title">
         <item name="android:layout_gravity">center</item>
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/text_color</item>
     </style>
     <style name="db_txtBody">
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:layout_gravity">center</item>
-
-
     </style>
 
     <style name="db_icon_text">
@@ -111,13 +109,12 @@
     </style>
 
     <style name="numpad_btn">
-        <item name="android:background">#00000000</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textSize">30dp</item>
-        <item name="android:padding">25dp</item>
-
+        <item name="android:textSize">28sp</item>
+        <item name="android:padding">16dp</item>
     </style>
 
     <style name="lbl_transact">

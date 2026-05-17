@@ -1,119 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_marginBottom="10dp"
-    android:background="@drawable/navbar_container"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/scroll_container"
+    android:elevation="2dp"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_weight="1">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lblExchInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USD -> PHP"
+            android:textColor="@color/text_color2"
+            android:textSize="12sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/lblExch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/lbl_transact"
-                android:text="USD"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow"/>
-
-            <TextView
-                android:id="@+id/lblCurr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/lbl_transact"
-                android:text="PHP"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
 
             <TextView
                 android:id="@+id/lblExchVal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/lbl_transact2"
-                android:text="10"/>
+                android:text="$100"
+                android:textColor="#5C6BF2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" -> "
+                android:textColor="#5C6BF2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/lblCurrVal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/lbl_transact2"
-                android:text="5600"/>
-
+                android:text="₱5,600"
+                android:textColor="#5C6BF2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="right"
-        android:layout_weight="1">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_transaction"
+            app:tint="#5C6BF2"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/lblTrs_DateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="20dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_recent"/>
-
-            <TextView
-                android:id="@+id/lblTrs_Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                style="@style/lbl_transact"
-                android:text="Mar 7"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                style="@style/lbl_transact"
-                android:text="•"/>
-
-            <TextView
-                android:id="@+id/lblTrs_Time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                style="@style/lbl_transact"
-                android:text="10:32"/>
-
-        </LinearLayout>
-
+            android:text="Mar 7 • 10:32 AM"
+            android:textColor="@color/text_color"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

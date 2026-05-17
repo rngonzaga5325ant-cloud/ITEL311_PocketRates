@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     tools:context=".transacFrag">
 
     <LinearLayout
@@ -10,56 +12,95 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Title -->
-        <LinearLayout
-            android:id="@+id/dashboardCurrencyLayout"
-            android:orientation="vertical"
+        <!-- Header -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="center"
-            android:layout_marginBottom="15dp">
+            android:padding="16dp"
+            android:gravity="center_vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_left"
+                app:tint="@color/text_color" />
+
+            <TextView
+                android:id="@+id/txtpageTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp">
+                android:layout_centerInParent="true"
+                android:text="Transaction"
+                style="@style/db_frag_title"
+                android:textSize="24sp" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/txtpageTitle"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_margin="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Transactions"
-                    style="@style/db_frag_title"/>
+        <!-- Filters -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="20dp"
+            android:gravity="center">
 
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAllTime"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:text="All Time"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:background="@drawable/btn_rounded"
+                android:elevation="4dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnThisWeek"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:text="This\nWeek"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                android:background="@drawable/scroll_container"
+                android:elevation="4dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnToday"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:text="Today"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                android:background="@drawable/scroll_container"
+                android:elevation="4dp" />
         </LinearLayout>
 
         <!-- Transaction List -->
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp"
-            android:paddingBottom="75dp"
-            android:layout_weight="10">
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp">
 
-            <ScrollView
+            <LinearLayout
+                android:id="@+id/transactionContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <!-- ONLY ONE CHILD inside ScrollView -->
-                <LinearLayout
-                    android:id="@+id/transactionContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
-
-            </ScrollView>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
     </LinearLayout>
 </FrameLayout>

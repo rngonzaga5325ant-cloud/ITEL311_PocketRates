@@ -24,63 +24,129 @@
             </androidx.fragment.app.FragmentContainerView>
 
     </LinearLayout>
-    <LinearLayout
 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:background="@color/bg_color"
-        android:paddingBottom="30dp">
-
-    <LinearLayout
-        android:id="@+id/navBarLayout"
-        android:orientation="horizontal"
-        android:layout_width="300dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/navbar_container"
         android:gravity="center"
-        android:layout_height="65dp">
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
 
-        <ImageButton
-            android:id="@+id/btnDashboard"
-            android:background="#00000000"
+        <LinearLayout
+            android:id="@+id/navBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_dashboard"
-            android:layout_weight="1"
-            android:text="Dashboard"
-            app:tint="@color/ic_tint_selector" />
+            android:layout_height="75dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/navbar_container"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-        <ImageButton
-            android:id="@+id/btnExchange"
-            android:src="@drawable/ic_exchange"
-            android:background="#00000000"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:tint="@color/ic_tint_selector"
-            android:text="Exchange"/>
-
-        <ImageButton
-                android:id="@+id/btnTransaction"
-                android:src="@drawable/ic_history"
+            <LinearLayout
+                android:id="@+id/btnDashboard"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:background="#00000000"
-                app:tint="@color/ic_tint_selector"
                 android:layout_weight="1"
-                android:text="Transaction"/>
-        <ImageButton
-            android:id="@+id/btnSettings"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_settings"
-            android:background="#00000000"
-            android:layout_weight="1"
-            android:text="Setting"
-            app:tint="@color/ic_tint_selector" />
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_home"
+                    app:tint="@color/ic_tint_selector" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dashboard"
+                    android:textColor="@color/ic_tint_selector"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnExchange"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_exchange"
+                    app:tint="@color/ic_tint_selector" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exchange"
+                    android:textColor="@color/ic_tint_selector"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnTransaction"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_transaction"
+                    app:tint="@color/ic_tint_selector" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Transaction"
+                    android:textColor="@color/ic_tint_selector"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnSettings"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_settings"
+                    app:tint="@color/ic_tint_selector" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Setting"
+                    android:textColor="@color/ic_tint_selector"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

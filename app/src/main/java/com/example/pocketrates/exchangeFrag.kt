@@ -50,7 +50,15 @@ class exchangeFrag : Fragment() {
         val btnSwap         = view.findViewById<ImageButton>(R.id.btn_swap)
         val btnChangeCurrVal = view.findViewById<ImageButton>(R.id.btnChangeCurrVal)
         val btnChangeConvVal = view.findViewById<ImageButton>(R.id.btnChangeConvVal)
-        val btnExchange      = view.findViewById<ImageButton>(R.id.btnExchange)
+        val btnExchange      = view.findViewById<View>(R.id.btnExchange)
+        val btnBack          = view.findViewById<ImageButton>(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            (activity as MainActivity).apply {
+                setSelectedButton(binding.btnDashboard)
+                gotoFrag(dashboardFrag())
+            }
+        }
 
         btnExchange.setOnClickListener { saveTransaction() }
 
@@ -102,7 +110,7 @@ class exchangeFrag : Fragment() {
 
         val calendar = java.util.Calendar.getInstance()
         val date = java.text.SimpleDateFormat("MMM d", java.util.Locale.getDefault()).format(calendar.time)
-        val time = java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault()).format(calendar.time)
+        val time = java.text.SimpleDateFormat("hh:mm a", java.util.Locale.getDefault()).format(calendar.time)
 
         viewModel.insert(
             TransactionEntity(

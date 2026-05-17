@@ -25,6 +25,7 @@ class dashboardFrag : Fragment() {
     // =========================
     private var selectedBaseCurrency = "USD"
     private var selectedQuoteCurrency = "PHP"
+    private var searchQuery: String = ""
 
     private val currencyMap = mutableMapOf<String, String>()
     private val currencyList = mutableListOf<String>()
@@ -34,6 +35,7 @@ class dashboardFrag : Fragment() {
     // UI
     // =========================
     private lateinit var btnExchange: ImageButton
+    private lateinit var btnSearch: ImageButton
     private lateinit var txtBaseCurrency: TextView
     private lateinit var txtRate: TextView
     private lateinit var txtCurrencyName: TextView
@@ -57,14 +59,15 @@ class dashboardFrag : Fragment() {
 
         // Bind UI
         btnExchange = view.findViewById(R.id.btnExchange)
+        btnSearch = view.findViewById(R.id.btnSearch)
         txtBaseCurrency = view.findViewById(R.id.txtBaseCurrency)
         txtRate = view.findViewById(R.id.txtRate)
         txtCurrencyName = view.findViewById(R.id.txtCurrencyName)
         liveRatesContainer = view.findViewById(R.id.liveRatesContainer)
 
-        // Set black font color for txtRate and txtCurrencyName
-        txtRate.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
-        txtCurrencyName.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
+        // Set white font color for txtRate and txtCurrencyName in the card
+        txtRate.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        txtCurrencyName.setTextColor(0xFFE0E0E0.toInt())
 
         // Load Preferences
         val sharedPreferences = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
@@ -76,12 +79,57 @@ class dashboardFrag : Fragment() {
             showCurrencyDropdown()
         }
 
+        btnSearch.setOnClickListener {
+            showSearchDialog()
+        }
+
         // Initial UI state
         txtBaseCurrency.text = selectedBaseCurrency
 
         // Load data
         loadCurrencies()
         fetchRate()
+    }
+
+    // =========================
+    // SEARCH DIALOG
+    // =========================
+    private fun showSearchDialog() {
+        if (currencyList.isEmpty()) return
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Search Live Rates")
+
+        val input = EditText(requireContext())
+        input.hint = "Enter currency code (e.g. USD)"
+        input.setText(searchQuery)
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        lp.setMargins(20, 0, 20, 0)
+        input.layoutParams = lp
+        
+        val container = LinearLayout(requireContext())
+        container.orientation = LinearLayout.VERTICAL
+        container.addView(input)
+        builder.setView(container)
+
+        builder.setPositiveButton("Filter") { _, _ ->
+            val query = input.text.toString().uppercase(Locale.ROOT).trim()
+            searchQuery = query
+            updateLiveRatesList()
+            if (query.isNotEmpty() && !currencyList.contains(query)) {
+                Toast.makeText(requireContext(), "Currency '$query' not found in live rates", Toast.LENGTH_SHORT).show()
+            }
+        }
+        builder.setNeutralButton("Clear") { _, _ ->
+            searchQuery = ""
+            updateLiveRatesList()
+        }
+        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+
+        builder.show()
     }
 
     // =========================
@@ -235,8 +283,24 @@ class dashboardFrag : Fragment() {
         val quoteSymbol = getCurrencySymbol(selectedQuoteCurrency)
 
         val entries = ratesMap.toSortedMap().entries.toList()
+        
+        // Filter entries based on search query
+        val filteredEntries = if (searchQuery.isEmpty()) {
+            entries
+        } else {
+            entries.filter { it.key.contains(searchQuery, ignoreCase = true) }
+        }
 
-        for ((index, entry) in entries.withIndex()) {
+        if (filteredEntries.isEmpty() && searchQuery.isNotEmpty()) {
+            val emptyMsg = TextView(requireContext())
+            emptyMsg.text = "No results found for '$searchQuery'"
+            emptyMsg.setPadding(20, 20, 20, 20)
+            emptyMsg.gravity = android.view.Gravity.CENTER
+            liveRatesContainer.addView(emptyMsg)
+            return
+        }
+
+        for ((index, entry) in filteredEntries.withIndex()) {
             val currency = entry.key
             val rate = entry.value
 
@@ -271,7 +335,7 @@ class dashboardFrag : Fragment() {
             liveRatesContainer.addView(rowView)
 
             // Divider (skip after last item)
-            if (index < entries.size - 1) {
+            if (index < filteredEntries.size - 1) {
                 val divider = View(requireContext())
                 val lp = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,

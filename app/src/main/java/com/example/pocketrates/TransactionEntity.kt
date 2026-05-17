@@ -13,5 +13,6 @@ data class TransactionEntity(
     val toAmount: String,
     val rate: String,
     val date: String,
-    val time: String
+    val time: String,
+    val timestamp: Long = System.currentTimeMillis()
 )
